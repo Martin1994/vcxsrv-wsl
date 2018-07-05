@@ -11,7 +11,7 @@ set IS64=1
 popd
 
 REM Add your additional paths here
-set PATH=%PATH%;C:\Users\Martin\AppData\Local\bin\NASM;C:\Users\Martin\dev\bison-3.0.4
+set PATH=%PATH%;C:\Users\Martin\AppData\Local\bin\NASM;C:\Users\Martin\dev\bison-3.0.4;%cd%\tools
 
 set MHMAKECONF=%cd%
 
