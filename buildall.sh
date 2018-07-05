@@ -1,9 +1,11 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 if [[ "$1" == "1" ]] ; then
-source ./setenv.sh 1
+# source ./setenv.sh 1
+IS64="1"
 elif [[ "$1" == "0" ]] ; then
-source ./setenv.sh 0
+# source ./setenv.sh 0
+IS64="0"
 else
   echo "Please pass 1 (64-bit compilation) or 0 (32-bit compilation) as first argument"
   exit 
@@ -29,11 +31,13 @@ check-error 'Please install/set environment for visual studio 2010'
 which python.exe > /dev/null 2>&1
 check-error 'Make sure that python.exe is in the PATH. (e.g. cp /usr/bin/python2.7.exe /usr/bin/python.exe)'
 
-# c:\perl should have a copy of strawberry perl portable edition
-which /cygdrive/c/perl/perl/bin/perl.exe > /dev/null 2>&1
+# # c:\perl should have a copy of strawberry perl portable edition
+# which /cygdrive/c/perl/perl/bin/perl.exe > /dev/null 2>&1
+# check-error 'Please install strawberry perl portable edition into c:\perl'
+# ORIPATH=$PATH
+# export PATH=/cygdrive/c/perl/perl/bin:$PATH
+which perl.exe > /dev/null 2>&1
 check-error 'Please install strawberry perl portable edition into c:\perl'
-ORIPATH=$PATH
-export PATH=/cygdrive/c/perl/perl/bin:$PATH
 
 # echo script lines from now one
 #set -v
@@ -59,7 +63,7 @@ if [[ ! -d "release64" ]]; then
 fi
 cd release64
 
-perl ../Configure VC-WIN64A --release
+perl.exe ../Configure VC-WIN64A --release
 else
 
 if [[ ! -d "release32" ]]; then
@@ -67,11 +71,11 @@ if [[ ! -d "release32" ]]; then
 fi
 cd release32
 
-perl ../Configure VC-WIN32 --release
+perl.exe ../Configure VC-WIN32 --release
 fi
 check-error 'Error executing perl'
 
-nmake
+nmake.exe
 check-error 'Error compiling openssl for release'
 
 cd ..
@@ -83,7 +87,7 @@ if [[ ! -d "debug64" ]]; then
 fi
 cd debug64
 
-perl ../Configure VC-WIN64A --debug
+perl.exe ../Configure VC-WIN64A --debug
 
 else
 
@@ -92,34 +96,33 @@ if [[ ! -d "debug32" ]]; then
 fi
 cd debug32
 
-perl ../Configure VC-WIN32 --debug
+perl.exe ../Configure VC-WIN32 --debug
 fi
 check-error 'Error executing perl'
 
-nmake
+nmake.exe
 check-error 'Error compiling openssl for debug'
 
 cd ../../pthreads
-nmake VC-static
+pwd
+which nmake.exe
+nmake.exe /f Makefile VC-static
 check-error 'Error compiling pthreads for release'
 
-nmake VC-static-debug
+nmake.exe /f Makefile VC-static-debug
 check-error 'Error compiling pthreads for debug'
 
 cd ..
 
 #reuse the cygwin perl again
-export PATH=$ORIPATH
+# export PATH=$ORIPATH
 
 MSBuild.exe tools/mhmake/mhmakevc10.sln /t:Build /p:Configuration=Release /p:Platform=x64
 check-error 'Error compiling mhmake for release'
 
-MSBuild.exe tools/mhmake/mhmakevc10.sln /t:Build /p:Configuration=Debug /p:Platform=x64
-check-error 'Error compiling mhmake for debug'
+export MHMAKECONF=`wslpath -wa .`
 
-export MHMAKECONF=`cygpath -da .`
-
-tools/mhmake/Release64/mhmake -P$2 -C xorg-server MAKESERVER=1 DEBUG=1
+tools/mhmake/Release64/mhmake.exe -P$2 -C xorg-server MAKESERVER=1 DEBUG=1
 check-error 'Error compiling vcxsrv for debug'
 
 tools/mhmake/Release64/mhmake.exe -P$2 -C xorg-server MAKESERVER=1
