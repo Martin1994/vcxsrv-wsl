@@ -128,6 +128,6 @@ check-error 'Error compiling vcxsrv for debug'
 tools/mhmake/Release64/mhmake.exe -P$2 -C xorg-server MAKESERVER=1
 check-error 'Error compiling vcxsrv for release'
 
-cd xorg-server/installer
-./packageall.bat
+# cd xorg-server/installer
+# ./packageall.bat
 
