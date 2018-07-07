@@ -308,6 +308,11 @@ winCreateBoundingWindowWindowed(ScreenPtr pScreen)
                  WINDOW_TITLE, HostName, display, (int) pScreenInfo->dwScreen);
   }
 
+    if (pScreenInfo->fNoDecorationFullScreen) {
+        iWidth = GetSystemMetrics(SM_CXSCREEN);
+        iHeight = GetSystemMetrics(SM_CYSCREEN);
+    }
+
     /* Create the window */
     *phwnd = CreateWindowExA(0, /* Extended styles */
                              WINDOW_CLASS,      /* Class name */

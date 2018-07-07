@@ -136,6 +136,12 @@ winValidateArgs(void)
             return FALSE;
         }
 
+        /* Check for -nodecoration with -fullscreen */
+        if (!g_ScreenInfo[i].fDecoration && g_ScreenInfo[i].fFullScreen) {
+            g_ScreenInfo[i].fFullScreen = FALSE;
+            g_ScreenInfo[i].fNoDecorationFullScreen = TRUE;
+        }
+
         /* Check for -multiwindow, -mwextwm, or -rootless and -nodecoration */
         if (!g_ScreenInfo[i].fDecoration && (FALSE
                                             || g_ScreenInfo[i].fMultiWindow
@@ -161,10 +167,9 @@ winValidateArgs(void)
         /* Check for fullscreen and any non-fullscreen parameters */
         if (g_ScreenInfo[i].fFullScreen
             && ((g_ScreenInfo[i].iResizeMode != resizeNotAllowed)
-                || !g_ScreenInfo[i].fDecoration
                 || g_ScreenInfo[i].fLessPointer)) {
             ErrorF("winValidateArgs - -fullscreen is invalid with "
-                   "-scrollbars, -resize, -nodecoration, or -lesspointer.\n");
+                   "-scrollbars, -resize, or -lesspointer.\n");
             return FALSE;
         }
 
