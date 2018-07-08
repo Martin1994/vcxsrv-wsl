@@ -1218,7 +1218,7 @@ winLogVersionInfo(void)
 
     ErrorF("Welcome to the VcXsrv X Server\n");
     ErrorF("Vendor: %s\n", XVENDORNAME);
-    ErrorF("Release: %d.%d.%d.%d-borderless\n\n", XORG_VERSION_MAJOR,
+    ErrorF("Release: %d.%d.%d.%d\n\n", XORG_VERSION_MAJOR,
            XORG_VERSION_MINOR, XORG_VERSION_PATCH, XORG_VERSION_SNAP);
 #ifdef HAVE_SYS_UTSNAME_H
     {
