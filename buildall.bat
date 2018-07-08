@@ -15,7 +15,7 @@ set PATH=%PATH%;C:\Users\Martin\AppData\Local\bin\NASM;C:\Users\Martin\dev\bison
 
 set MHMAKECONF=%cd%
 
-REM bash -c "./buildall.sh 1 4"
+bash -c "./buildall.sh 1 4"
 
 cd xorg-server/installer
 ./packageall.bat
