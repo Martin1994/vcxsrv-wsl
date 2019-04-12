@@ -30,8 +30,8 @@ def escapepath(val):
   for path in paths:
     if not tmp.has_key(path):
       tmp[path]=1
-      path=path.replace("c:","/cygdrive/c")
-      path=path.replace("C:","/cygdrive/c")
+      path=path.replace("c:","/c")
+      path=path.replace("C:","/c")
       path=path.replace("\\","/")
       path=path.replace(" ","\\ ")
       path=path.replace("(","\\(")

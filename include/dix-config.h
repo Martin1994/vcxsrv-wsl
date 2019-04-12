@@ -173,7 +173,7 @@
 #undef HAVE_SHA1_IN_COMMONCRYPTO
 
 /* Define to use CryptoAPI SHA1 functions */
-#undef HAVE_SHA1_IN_CRYPTOAPI
+#define HAVE_SHA1_IN_CRYPTOAPI
 
 /* Define to use libmd SHA1 functions */
 #undef HAVE_SHA1_IN_LIBMD

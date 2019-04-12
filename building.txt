@@ -1,9 +1,10 @@
 Prerequisits:
-- Visual Studio 2017 Community Edition
-- Strawberry perl portable edition installed in c:\perl
-- Cygwin (install the required tools when errors seen: nasm, flex, bison, python, ....)
-- To build the installer: nsis
+- Visual Studio 2019 Community Edition
+- MSYS2
+-- pacman -S nasm flex bison python2 python3 python3-pip gperf gcc libcrypt-devel libxml2-devel libxslt-devel
+-- CC=gcc C_INCLUDE_PATH=/usr/include/libxml2 pip3 install lxml
+-- pip3 install mako
+- To build the installer: nsis (you need "Language Files" and "Plugins")
 
-Run buildall.sh 1 9 to build the 64-bit version and buildall.sh 0 9 for the 32-bit.
+Run buildall.sh 1 8 to build the 64-bit version and buildall.sh 0 8 for the 32-bit.
 (The second number on the command line is the number of parallel processes to use)
-

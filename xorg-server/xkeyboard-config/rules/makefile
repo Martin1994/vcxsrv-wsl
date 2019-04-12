@@ -204,10 +204,10 @@ $(DESTDIR)\%.lst: $(DESTDIR)\%.xml
 	perl xml2lst.pl < $< > $@
 
 $(DESTDIR)\base: compat\all $(base_parts)
-	merge $@ $(base_parts)
+	python2 merge.py $@ $(base_parts)
 
 $(DESTDIR)\evdev: compat\all $(evdev_parts)
-	merge $@ $(evdev_parts) 
+	python2 merge.py $@ $(evdev_parts) 
 
 dist_files = xkb.dtd README
 

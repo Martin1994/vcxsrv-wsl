@@ -101,7 +101,7 @@ static void ReplaceCurlyBraces(string &String)
 %{
 # define YY_USER_ACTION  yylloc->columns (yyleng);
 
-#define inclineno() yylloc->incline()
+#define inclineno() yylloc->lines(1); yylloc->step()
 #define lineno()    yylloc->end.line
 #define colno()     yylloc->end.column
 

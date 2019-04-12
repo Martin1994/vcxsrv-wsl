@@ -7,7 +7,7 @@ if [ ! -x "$_mhmake" ] ; then
 fi
 
 rm -f commands.sh
-python setenv.py $1 > commands.sh
+python2 setenv.py $1 > commands.sh
 chmod +x commands.sh
 source commands.sh
 rm -f commands.sh

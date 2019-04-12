@@ -22,11 +22,11 @@
 
 %require "3.0.2"
 %defines
-%define parser_class_name { mhmakeparser }
+%define api.parser.class { mhmakeparser }
 %define parser_base_class_name { mhmakeparserbase }
 %define parser_class_constructor_init { : mhmakeparserbase(pMakefile,pLexer) }
 %define parser_class_constructor_param { mhmakefileparser *pMakefile, mhmakeFlexLexer *pLexer }
-%error-verbose
+%define parse.error verbose
 
 %code requires {
 #include "mhmakefileparser.h"

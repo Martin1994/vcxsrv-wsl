@@ -9,9 +9,6 @@ top_srcdir=../..
 srcdir=.
 builddir=.
 
-BISON_PKGDATADIR=../../../tools/mhmake/src/bisondata
-export BISON_PKGDATADIR
-
 YACC_GEN = bison.exe -v
 LEX_GEN = flex.exe --nounistd
 PYTHON_GEN = python

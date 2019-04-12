@@ -37,7 +37,7 @@ CSRCS = action.c \
         xkbpath.c \
         xkbscan.c
 
-LINKLIBS += $(PTHREADLIB) $(FREETYPELIB) $(OPENSSLLIB)
+LINKLIBS += $(PTHREADLIB) $(FREETYPELIB)
 
 $(OBJDIR)\xkbparse.c $(OBJDIR)\xkbparse.h: xkbparse.y
-	bison.bat -d -o$(OBJDIR)\xkbparse.c $<
+	bison -d -o$(OBJDIR)\xkbparse.c $<
