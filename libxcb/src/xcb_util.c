@@ -41,6 +41,9 @@
 
 #ifdef _WIN32
 #include "xcb_windefs.h"
+#ifdef UNIXCONN
+#include <afunix.h>
+#endif
 #else
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -223,9 +226,9 @@ int xcb_parse_display(const char *name, char **host, int *displayp,
 }
 
 static int _xcb_open_tcp(const char *host, char *protocol, const unsigned short port);
-#ifndef _WIN32
+#ifdef UNIXCONN
 static int _xcb_open_unix(char *protocol, const char *file);
-#endif /* !WIN32 */
+#endif /* UNIXCONN */
 #ifdef HAVE_ABSTRACT_SOCKETS
 static int _xcb_open_abstract(char *protocol, const char *file, size_t filelen);
 #endif
@@ -252,7 +255,7 @@ static int _xcb_open(const char *host, char *protocol, const int display)
         return _xcb_open_tcp(host, protocol, port);
     }
 
-#ifndef _WIN32
+#ifdef UNIXCONN
 #if defined(HAVE_TSOL_LABEL_H) && defined(HAVE_IS_SYSTEM_LABELED)
     /* Check special path for Unix sockets under Solaris Trusted Extensions */
     if (is_system_labeled())
@@ -312,7 +315,7 @@ static int _xcb_open(const char *host, char *protocol, const int display)
     }
 
     return fd;
-#endif /* !_WIN32 */
+#endif /* UNIXCONN */
     return -1; /* if control reaches here then something has gone wrong */
 }
 
@@ -454,7 +457,7 @@ static int _xcb_open_tcp(const char *host, char *protocol, const unsigned short 
 #endif
 }
 
-#ifndef _WIN32
+#ifdef UNIXCONN
 static int _xcb_open_unix(char *protocol, const char *file)
 {
     int fd;
@@ -484,7 +487,7 @@ static int _xcb_open_unix(char *protocol, const char *file)
     }
     return fd;
 }
-#endif /* !_WIN32 */
+#endif /* UNIXCONN */
 
 #ifdef HAVE_ABSTRACT_SOCKETS
 static int _xcb_open_abstract(char *protocol, const char *file, size_t filelen)

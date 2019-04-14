@@ -325,8 +325,7 @@
 #define TCPCONN 1
 
 /* Support UNIX socket connections */
-#undef UNIXCONN
-
+#define UNIXCONN 1
 /* unaligned word accesses behave as expected */
 #undef WORKING_UNALIGNED_INT
 

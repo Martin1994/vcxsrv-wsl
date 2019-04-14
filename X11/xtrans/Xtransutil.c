@@ -456,9 +456,34 @@ is_numeric (const char *str)
 #define lstat(a,b) stat(a,b)
 #endif
 
+#ifdef WIN32
+// Must be after the lstat check
+#include <dirent.h>
+#endif
+
 #define FAIL_IF_NOMODE  1
 #define FAIL_IF_NOT_ROOT 2
 #define WARN_NO_ACCESS 4
+
+static int mkdirp(char *path, mode_t mode)
+{
+    struct stat sb;
+
+    if (!*path || !stat(path, &sb)) {
+        return 0;
+	}
+
+	char parentPath[128];
+	int length = strrchr(path, '/') - path;
+	strncpy(parentPath, path, length);
+	parentPath[length] = '\0';
+	int recursionError = mkdirp(parentPath, mode);
+    if (recursionError) {
+		return recursionError;
+	}
+
+    return mkdir(path, mode);
+}
 
 /*
  * We make the assumption that when the 'sticky' (t) bit is requested
@@ -509,7 +534,7 @@ trans_mkdir(const char *path, int mode)
 #endif
 	    }
 #else
-	if (mkdir(path) == 0) {
+	if (mkdirp(path, mode) == 0) {
 #endif
 	} else {
 	    prmsg(1, "mkdir: ERROR: Cannot create %s\n",
