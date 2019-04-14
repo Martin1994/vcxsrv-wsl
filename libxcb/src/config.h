@@ -6,6 +6,9 @@
 /* Has Wraphelp.c needed for XDM AUTH protocols */
 #undef HASXDMAUTH
 
+/* Define if your platform supports unix sockets */
+#define UNIXCONN 1
+
 /* Define if your platform supports abstract sockets */
 #undef HAVE_ABSTRACT_SOCKETS
 

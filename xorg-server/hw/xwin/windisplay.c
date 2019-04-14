@@ -51,6 +51,12 @@ winGetDisplayName(char *szDisplay, unsigned int screen)
     }
     else
 #endif
+#ifdef UNIXCONN
+    if (_XSERVTransIsListening("unix")) {
+        snprintf(szDisplay, 512, ":%s.%d", display, screen);
+    }
+    else
+#endif
     if (_XSERVTransIsListening("inet")) {
         snprintf(szDisplay, 512, "127.0.0.1:%s.%d", display, screen);
     }

@@ -693,7 +693,7 @@ class CMyWizard : public CWizard
             // Construct display strings
             int DisplayNbr=atoi(config.display.c_str());
             std::string display_id = ":" + config.display;
-            std::string display = "DISPLAY=127.0.0.1" + display_id + ".0";
+            std::string display;
 
             // Build Xsrv commandline
             buffer = "vcxsrv ";
@@ -826,7 +826,11 @@ class CMyWizard : public CWizard
                   std::stringstream ss;
                   ss<<*pDisplayfd;
                   display_id = ":" + ss.str();
+                }
+                if (config.extra_params.find("-nolisten tcp") == std::string::npos) {
                   display = "DISPLAY=127.0.0.1" + display_id + ".0";
+                } else {
+                  display = "DISPLAY=unix" + display_id + ".0";
                 }
                 // Set DISPLAY variable
                 _putenv(display.c_str());

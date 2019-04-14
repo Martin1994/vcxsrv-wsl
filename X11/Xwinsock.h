@@ -73,6 +73,9 @@ The Open Group.
 #endif
 #include <winsock2.h>
 #include <ws2tcpip.h>
+#ifdef UNIXCONN
+#include <afunix.h>
+#endif
 #undef Status
 typedef int Status;
 #undef BYTE

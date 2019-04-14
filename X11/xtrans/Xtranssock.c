@@ -1084,7 +1084,11 @@ TRANS(SocketUNIXResetListener) (XtransConnInfo ciptr)
 	stat (unsock->sun_path, &statb) == -1 ||
         ((statb.st_mode & S_IFMT) !=
 #if defined(NCR) || defined(SCO325) || !defined(S_IFSOCK)
+#if defined(S_IFIFO)
 	  		S_IFIFO
+#else
+			-1 // always reset
+#endif
 #else
 			S_IFSOCK
 #endif
@@ -2528,6 +2532,9 @@ Xtransport	TRANS(SocketLocalFuncs) = {
 #if XTRANS_SEND_FDS
         TRANS(SocketSendFd),
         TRANS(SocketRecvFd),
+#else
+		NULL,
+		NULL,
 #endif
 	TRANS(SocketDisconnect),
 	TRANS(SocketUNIXClose),
@@ -2579,6 +2586,9 @@ Xtransport	TRANS(SocketUNIXFuncs) = {
 #if XTRANS_SEND_FDS
         TRANS(SocketSendFd),
         TRANS(SocketRecvFd),
+#else
+		NULL,
+		NULL,
 #endif
 	TRANS(SocketDisconnect),
 	TRANS(SocketUNIXClose),

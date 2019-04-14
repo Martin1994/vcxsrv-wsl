@@ -88,7 +88,6 @@
 #define TCPCONN 1
 
 /* Support UNIX socket connections */
-#undef UNIXCONN
-
+#define UNIXCONN 1
 /* Version number of package */
 #undef VERSION
