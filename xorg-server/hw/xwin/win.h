@@ -345,6 +345,7 @@ typedef struct {
 #endif
     Bool fFullScreen;
     Bool fDecoration;
+    Bool fNoDecorationFullScreen;
 #ifdef XWIN_MULTIWINDOWEXTWM
     Bool fMWExtWM;
 #endif

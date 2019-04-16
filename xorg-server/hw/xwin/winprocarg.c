@@ -127,6 +127,7 @@ winInitializeScreenDefaults(void)
     defaultScreenInfo.pfb = NULL;
     defaultScreenInfo.fFullScreen = FALSE;
     defaultScreenInfo.fDecoration = TRUE;
+    defaultScreenInfo.fNoDecorationFullScreen = FALSE;
 #ifdef XWIN_MULTIWINDOWEXTWM
     defaultScreenInfo.fMWExtWM = FALSE;
 #endif
