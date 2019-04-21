@@ -1771,6 +1771,9 @@ glxWinCreateContext(__GLXscreen * screen,
 static int
 GetShift(int mask)
 {
+    if (mask == 0) {
+        return 0; // return error?
+    }
     int shift = 0;
 
     while ((mask &1) == 0) {
