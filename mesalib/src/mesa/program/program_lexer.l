@@ -31,8 +31,11 @@
 #include "program/prog_instruction.h"
 #include "program/prog_statevars.h"
 #include "program/symbol_table.h"
+#undef yylex
 #include "program/program_parser.h"
 #include "program/program_parse.tab.h"
+#undef yylex
+#define yylex _mesa_program_lexer_lex 
 #include "util/strtod.h"
 
 #define require_ARB_vp (yyextra->mode == ARB_vertex)

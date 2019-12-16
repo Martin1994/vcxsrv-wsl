@@ -41,9 +41,6 @@
 
 #include "util/u_math.h"
 
-extern void *yy_scan_string(char *);
-extern void yy_delete_buffer(void *);
-
 static struct asm_symbol *declare_variable(struct asm_parser_state *state,
     char *name, enum asm_type t, struct YYLTYPE *locp);
 
