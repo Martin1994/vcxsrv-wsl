@@ -27,7 +27,10 @@
 #include <ctype.h>
 
 #include "glcpp.h"
+#undef yylex
 #include "glcpp-parse.h"
+#undef yylex
+#define yylex glcpp_lex
 
 /* Flex annoyingly generates some functions without making them
  * static. Let's declare them here. */

@@ -26,7 +26,10 @@
 #include "util/strtod.h"
 #include "ast.h"
 #include "glsl_parser_extras.h"
+#undef yylex
 #include "glsl_parser.h"
+#undef yylex
+#define yylex _mesa_glsl_lexer_lex
 
 static int classify_identifier(struct _mesa_glsl_parse_state *, const char *,
 			       unsigned name_len, YYSTYPE *output);
